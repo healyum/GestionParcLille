@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GestionParcLille</string>
+
+    <string-array name="type_probleme">
+        <item>Arbre à tailler</item>
+        <item>Arbre à abattre</item>
+        <item>Détritus</item>
+        <item>Haie à tailler</item>
+        <item>Mauvaise herbe</item>
+        <item>Autre</item>
+    </string-array>
 </resources>
