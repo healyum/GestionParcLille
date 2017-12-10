@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -57,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
         // Gestion du GPS
         m_text = (TextView) findViewById(R.id.affichage_coordonnees);
         m_gps = new GPS(this);
+
+        // BDD
+        Problem problem = new Problem("Arbre à tailler", "50", "3", "Gros arbre à tailler");
+        problem.save();
+
+        problem.findById(Problem.class, 1);
+        TextView probleme1 = (TextView) findViewById(R.id.probleme1);
+        probleme1.setText(problem.description);
+
     }
 
     private void updateLocation()
