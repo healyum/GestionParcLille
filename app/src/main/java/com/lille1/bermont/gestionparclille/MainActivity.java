@@ -1,6 +1,7 @@
 package com.lille1.bermont.gestionparclille;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -73,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
         String format = "(" + location.getLatitude() + ", " + location.getLongitude() + ", " + location.getAltitude() + ")";
 
         m_text.setText(format);
+    }
+
+    /** Called when the user taps the Send button */
+    public void showProblemDetails(View view) {
+        Intent intent = new Intent(this, ProblemDetails.class);
+        startActivity(intent);
     }
 
 }

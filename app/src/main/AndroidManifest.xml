@@ -27,6 +27,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ProblemDetails"
+            android:label="@string/title_activity_problem_details">
+        </activity>
+
     </application>
 
 </manifest>

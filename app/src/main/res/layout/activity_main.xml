@@ -47,6 +47,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Probleme 1" />
+
+        <Button
+            android:id="@+id/ProblemDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showProblemDetails"
+            android:text="Détail d'un probleme" />
     </LinearLayout>
 
     <TextView

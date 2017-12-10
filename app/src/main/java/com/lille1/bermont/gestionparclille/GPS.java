@@ -31,7 +31,7 @@ public class GPS
             return;
         }
 
-        m_locationManager.requestLocationUpdates(m_provider, 1, 0, new LocationListener()
+        m_locationManager.requestLocationUpdates(m_provider, 0, 0, new LocationListener()
         {
             public void onStatusChanged(String s, int i, Bundle bundle) {}
             public void onProviderEnabled(String s) {}
