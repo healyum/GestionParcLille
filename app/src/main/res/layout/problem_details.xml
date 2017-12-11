@@ -29,7 +29,7 @@
         android:id="@+id/problemLong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="13dp"
         android:text="Longitude :"
         app:layout_constraintStart_toStartOf="@+id/problemLat"
         app:layout_constraintTop_toBottomOf="@+id/problemLat" />
@@ -45,10 +45,10 @@
         app:layout_constraintTop_toBottomOf="@+id/problemLong" />
 
     <Button
-        android:id="@+id/btn_googlemaps"
+        android:id="@+id/btn_showmap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="83dp"
+        android:layout_marginTop="82dp"
         android:text="Visualiser sur une carte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

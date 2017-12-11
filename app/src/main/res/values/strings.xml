@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">GestionParcLille</string>
     <string name="title_activity_problem_details">Détail du problème</string>
+    <string name="title_activity_problem_add">Ajouter un problème</string>
 
     <string-array name="type_probleme">
         <item>Arbre à tailler</item>

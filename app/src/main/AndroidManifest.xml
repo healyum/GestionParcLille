@@ -32,6 +32,11 @@
             android:label="@string/title_activity_problem_details">
         </activity>
 
+        <activity
+            android:name=".ProblemAdd"
+            android:label="@string/title_activity_problem_add">
+        </activity>
+
     </application>
 
 </manifest>

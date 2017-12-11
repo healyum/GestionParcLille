@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
+
+    <Spinner
+        android:id="@+id/type_probleme"
+        android:layout_width="289dp"
+        android:layout_height="33dp"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="128dp" />
+
+    <TextView
+        android:id="@+id/affichage_coordonnees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="coordonees"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="214dp" />
+
+    <Button
+        android:id="@+id/btn_showmap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Récupérer coordonnées"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+    <TextView
+        android:id="@+id/title_add_problem"
+        android:layout_width="348dp"
+        android:layout_height="39dp"
+        android:text="Ajouter un nouveau problème"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="25dp" />
+
+    <EditText
+        android:id="@+id/adresse_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="302dp" />
+
+    <TextView
+        android:id="@+id/adresse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adresse (opt.)"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="302dp" />
+
+    <TextView
+        android:id="@+id/description_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description :"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="375dp" />
+
+    <EditText
+        android:id="@+id/description_pb_value"
+        android:layout_width="wrap_content"
+        android:layout_height="77dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="375dp" />
+
+    <Button
+        android:id="@+id/btn_send_problem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter le problème"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="451dp" />
+
+    <TextView
+        android:id="@+id/selection_problem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sélectionnez le type de problème :"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="87dp" />
+</android.support.constraint.ConstraintLayout>
