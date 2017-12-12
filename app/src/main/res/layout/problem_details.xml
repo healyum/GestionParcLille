@@ -17,6 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/problemTypeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="94dp"
+        android:layout_marginTop="41dp"
+        android:text="Non défini"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/problemLat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,13 +36,33 @@
         app:layout_constraintTop_toBottomOf="@+id/problemType" />
 
     <TextView
+        android:id="@+id/problemLatValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Non défini"
+        app:layout_constraintStart_toStartOf="@+id/problemTypeValue"
+        app:layout_constraintTop_toBottomOf="@+id/problemTypeValue" />
+
+    <TextView
         android:id="@+id/problemLong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="12dp"
         android:text="Longitude :"
         app:layout_constraintStart_toStartOf="@+id/problemLat"
         app:layout_constraintTop_toBottomOf="@+id/problemLat" />
+
+    <TextView
+        android:id="@+id/problemLongValue"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginBottom="38dp"
+        android:layout_marginTop="31dp"
+        android:text="Non défini"
+        app:layout_constraintBottom_toBottomOf="@+id/problemDescValue"
+        app:layout_constraintStart_toStartOf="@+id/problemLatValue"
+        app:layout_constraintTop_toTopOf="@+id/problemLatValue" />
 
     <TextView
         android:id="@+id/problemDesc"
@@ -44,18 +74,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/problemLong" />
 
+    <TextView
+        android:id="@+id/problemDescValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:text="Non défini"
+        app:layout_constraintStart_toStartOf="@+id/problemLongValue"
+        app:layout_constraintTop_toBottomOf="@+id/problemLatValue" />
+
     <Button
         android:id="@+id/btn_showmap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="81dp"
         android:text="Visualiser sur une carte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/problemDesc" />
 
     <Button
-        android:id="@+id/deleteProblem"
+        android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="42dp"

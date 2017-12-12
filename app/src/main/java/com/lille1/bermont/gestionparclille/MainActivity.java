@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // BDD
-        Problem problemMock = new Problem("Détritus", "50", "3", "Poubelle renversée");
-        problemMock.save();
+        //Problem problemMock = new Problem("Détritus", "50", "3", "Poubelle renversée");
+        //problemMock.save();
 
         //problem.findById(Problem.class, 1);
         //TextView probleme1 = (TextView) findViewById(R.id.problem1);
@@ -73,30 +73,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-/*
-        Runnable mRunnable = new Runnable() {
-            public void run() {
-                adapter.clear();
-                adapter.notifyDataSetChanged();
-            }
-        };*/
 
-        /*mListView.clear();
-        adapter.notifyDataSetChanged();*/
+        /* Méthode très sale pour raffrichir liste après ajout*/
+        List<Problem> allProblems = Problem.listAll(Problem.class);
 
-        /*mListView.clear();
-        myList.add("your array list items");
-        setListAdapter(adapter);
+        final ArrayList<String> listeProblem = new ArrayList<>();
+        for(Problem problem:allProblems){
+            listeProblem.add(problem.description);
+        }
+
+        // Récupération de la ListView
+        ListView mListView = (ListView)findViewById(R.id.listView);
+
+        // Création d'un adapter à l'aide d'un tableau de String (myList)
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listeProblem);
+
+        // Affectation de l'adapter à la liste view
+        mListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        mListView.deferNotifyDataSetChanged();*/ // rafraichir la vue après ajout ou suppression d'un élément
-    }
 
+        mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, ProblemDetails.class);
+                intent.putExtra("pb_desc", listeProblem.get(position));
+                intent.putExtra("pb_type", listeProblem);
+                startActivity(intent);
+            }
+        });
+    }
 
     /* Appel de la vue pour ajouter un problème */
     public void addProblem(View view) {

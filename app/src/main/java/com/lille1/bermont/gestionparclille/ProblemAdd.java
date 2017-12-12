@@ -85,7 +85,6 @@ public class ProblemAdd extends AppCompatActivity {
         Problem problem = new Problem(problemType, problemLatitude, problemLongitude, ProblemDescription);
         problem.save();
 
-
         finish();
     }
 }
