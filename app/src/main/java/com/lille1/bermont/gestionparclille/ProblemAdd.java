@@ -46,14 +46,15 @@ public class ProblemAdd extends AppCompatActivity {
         // Gestion du GPS
         m_text = (TextView) findViewById(R.id.affichage_coordonnees);
         m_gps = new GPS(this);
+        updateLocation();
 
     }
 
     private void updateLocation()
     {
         Location location = m_gps.getLocation();
-        String format = "(" + location.getLatitude() + ", " + location.getLongitude() + ", " + location.getAltitude() + ")";
+        String coordonnees = "(" + location.getLatitude() + ", " + location.getLongitude() + ")";
 
-        m_text.setText(format);
+        m_text.setText(coordonnees);
     }
 }

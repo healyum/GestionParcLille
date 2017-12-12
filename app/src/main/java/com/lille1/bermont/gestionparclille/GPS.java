@@ -20,6 +20,8 @@ public class GPS
     {
         m_context = context;
         m_locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        //Location gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //Location networkLocation =  locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
         // permissions
         if((ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -31,12 +33,11 @@ public class GPS
             return;
         }
 
-        m_locationManager.requestLocationUpdates(m_provider, 0, 0, new LocationListener()
+        m_locationManager.requestLocationUpdates(m_provider, 1, 0, new LocationListener()
         {
             public void onStatusChanged(String s, int i, Bundle bundle) {}
             public void onProviderEnabled(String s) {}
             public void onProviderDisabled(String s) {}
-
             public void onLocationChanged(Location location)
             {
                 m_location = location;
@@ -50,6 +51,13 @@ public class GPS
             if((ActivityCompat.checkSelfPermission(m_context, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) ||
                     (ActivityCompat.checkSelfPermission(m_context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED))
+                m_location = m_locationManager.getLastKnownLocation(m_provider);
+
+        if(m_location == null)
+            if((ActivityCompat.checkSelfPermission(m_context, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) ||
+                    (ActivityCompat.checkSelfPermission(m_context, Manifest.permission.ACCESS_COARSE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED))
                 m_location = m_locationManager.getLastKnownLocation(m_provider);
 
@@ -58,7 +66,6 @@ public class GPS
             m_location = new Location(m_provider);
             m_location.setLatitude(0);
             m_location.setLongitude(0);
-            m_location.setAltitude(0);
         }
 
         return m_location;

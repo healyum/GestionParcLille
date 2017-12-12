@@ -7,61 +7,51 @@
     tools:context="com.lille1.bermont.gestionparclille.MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="74dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/problem_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_title">
-
-        <TextView
-            android:id="@+id/probleme_reference_titre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Les derniers problèmes reportés :" />
-
-        <TextView
-            android:id="@+id/probleme1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Probleme 1" />
-
-        <Button
-            android:id="@+id/ProblemDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="showProblemDetails"
-            android:text="Détail d'un probleme" />
-    </LinearLayout>
-
     <Button
         android:id="@+id/problem_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="26dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="13dp"
         android:onClick="addProblem"
         android:text="Ajouter un problème"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/problem1" />
 
     <TextView
         android:id="@+id/main_title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="29dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="11dp"
-        android:layout_marginTop="16dp"
-        android:text="Bienvenue dans l'application de gestion du parc vert Lille 1"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_marginStart="28dp"
+        android:text="Gestion du parc vert Lille 1. Les derniers problèmes :"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/listView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/problem1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_title" />
+
+    <TextView
+        android:id="@+id/problem1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="probleme1"
+        app:layout_constraintBottom_toTopOf="@+id/problem_add"
+        app:layout_constraintEnd_toEndOf="@+id/problem_add"
+        app:layout_constraintStart_toStartOf="@+id/problem_add"
+        app:layout_constraintTop_toBottomOf="@+id/listView" />
 
 </android.support.constraint.ConstraintLayout>

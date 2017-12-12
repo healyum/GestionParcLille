@@ -9,12 +9,26 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    ListView mListView;
+    private String[] prenoms = new String[]{
+            "Antoine", "Benoit", "Cyril", "David", "Eloise", "Florent",
+            "Gerard", "Hugo", "Ingrid", "Jonathan", "Kevin", "Logan",
+            "Mathieu", "Noemie", "Olivia", "Philippe", "Quentin", "Romain",
+            "Sophie", "Tristan", "Ulric", "Vincent", "Willy", "Xavier",
+            "Yann", "Zoé"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +46,38 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // BDD
-        Problem problem = new Problem("Arbre à tailler", "50", "3", "Gros arbre à tailler");
-        problem.save();
+        Problem problemMock = new Problem("Détritus", "50", "3", "Poubelle renversée");
+        problemMock.save();
 
-        problem.findById(Problem.class, 1);
-        TextView probleme1 = (TextView) findViewById(R.id.probleme1);
-        probleme1.setText(problem.description);
-    }
+        //problem.findById(Problem.class, 1);
+        //TextView probleme1 = (TextView) findViewById(R.id.problem1);
+        //probleme1.setText(problem.description);
 
-    /* Appel de la vue de détail d'un problème */
-    public void showProblemDetails(View view) {
-        Intent intent = new Intent(this, ProblemDetails.class);
-        startActivity(intent);
+
+        // Tableau de données
+        List<Problem> allProblems = Problem.listAll(Problem.class);
+
+        ArrayList<String> listeProblem = new ArrayList<>();
+        for(Problem problem:allProblems){
+            listeProblem.add(problem.description);
+        }
+
+        // Listview
+        mListView = (ListView) findViewById(R.id.listView);
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_list_item_1, listeProblem);
+        mListView.setAdapter(adapter);
+
+        // Afficher détail d'un problème
+        mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, ProblemDetails.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     /* Appel de la vue pour ajouter un problème */
