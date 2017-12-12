@@ -1,5 +1,6 @@
 package com.lille1.bermont.gestionparclille;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,19 +18,27 @@ public class ProblemAdd extends AppCompatActivity {
 
     TextView m_text;
     GPS m_gps;
+    Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.problem_add);
 
-        // Itinialisation des boutons
         // Affiche un itinéraire sur une carte (Google Maps)
-        Button btn_itineraire = (Button) findViewById(R.id.btn_showmap);
+        Button btn_itineraire = (Button) findViewById(R.id.btn_position);
         btn_itineraire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateLocation();
+            }
+        });
+
+        Button btn_send_problem = (Button) findViewById(R.id.btn_send_problem);
+        btn_send_problem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendProblem();
             }
         });
 
@@ -46,15 +55,37 @@ public class ProblemAdd extends AppCompatActivity {
         // Gestion du GPS
         m_text = (TextView) findViewById(R.id.affichage_coordonnees);
         m_gps = new GPS(this);
-        updateLocation();
 
+        updateLocation();
     }
 
     private void updateLocation()
     {
-        Location location = m_gps.getLocation();
+        location = m_gps.getLocation();
         String coordonnees = "(" + location.getLatitude() + ", " + location.getLongitude() + ")";
 
         m_text.setText(coordonnees);
+    }
+
+    private void sendProblem(){
+        //TextView address = (TextView) findViewById(R.id.adresse_value);
+
+        TextView description = (TextView) findViewById(R.id.description_pb_value);
+        String ProblemDescription = description.getText().toString();
+
+        Spinner selectedProblemType = (Spinner) findViewById(R.id.type_probleme);
+        String problemType = selectedProblemType.getSelectedItem().toString();
+
+        double problemLat = location.getLatitude();
+        String problemLatitude = String.valueOf(problemLat);
+
+        double problemLong = location.getLatitude();
+        String problemLongitude = String.valueOf(problemLong);
+
+        Problem problem = new Problem(problemType, problemLatitude, problemLongitude, ProblemDescription);
+        problem.save();
+
+
+        finish();
     }
 }

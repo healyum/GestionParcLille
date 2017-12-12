@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,6 +31,13 @@ public class ProblemDetails extends AppCompatActivity {
                 ShowPositionOnMap();
             }
         });
+
+        String pb_description = getIntent().getExtras().getString("pb_desc","defaultKey");
+        String pb_type = getIntent().getExtras().getString("pb_type","defaultKey");
+        TextView problemType = (TextView) findViewById(R.id.problemType);
+        TextView problemDescription = (TextView) findViewById(R.id.problemDesc);
+        problemType.setText(pb_description);
+        problemDescription.setText(pb_type);
     }
 
     private void ShowPositionOnMap() {

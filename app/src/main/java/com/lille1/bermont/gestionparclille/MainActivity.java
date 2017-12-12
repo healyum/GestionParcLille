@@ -22,13 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ListView mListView;
-    private String[] prenoms = new String[]{
-            "Antoine", "Benoit", "Cyril", "David", "Eloise", "Florent",
-            "Gerard", "Hugo", "Ingrid", "Jonathan", "Kevin", "Logan",
-            "Mathieu", "Noemie", "Olivia", "Philippe", "Quentin", "Romain",
-            "Sophie", "Tristan", "Ulric", "Vincent", "Willy", "Xavier",
-            "Yann", "Zoé"
-    };
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // Tableau de données
         List<Problem> allProblems = Problem.listAll(Problem.class);
 
-        ArrayList<String> listeProblem = new ArrayList<>();
+        final ArrayList<String> listeProblem = new ArrayList<>();
         for(Problem problem:allProblems){
             listeProblem.add(problem.description);
         }
@@ -65,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         // Listview
         mListView = (ListView) findViewById(R.id.listView);
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, listeProblem);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, listeProblem);
         mListView.setAdapter(adapter);
 
         // Afficher détail d'un problème
@@ -74,11 +67,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ProblemDetails.class);
+                intent.putExtra("pb_desc", listeProblem.get(position));
+                intent.putExtra("pb_type", listeProblem);
                 startActivity(intent);
             }
         });
 
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+/*
+        Runnable mRunnable = new Runnable() {
+            public void run() {
+                adapter.clear();
+                adapter.notifyDataSetChanged();
+            }
+        };*/
+
+        /*mListView.clear();
+        adapter.notifyDataSetChanged();*/
+
+        /*mListView.clear();
+        myList.add("your array list items");
+        setListAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        mListView.deferNotifyDataSetChanged();*/ // rafraichir la vue après ajout ou suppression d'un élément
+    }
+
 
     /* Appel de la vue pour ajouter un problème */
     public void addProblem(View view) {

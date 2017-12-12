@@ -34,4 +34,9 @@ public class Problem extends SugarRecord {
             SugarRecord.deleteAll(domain);
         }
     }
+
+    @Override
+    public String toString() {
+        return typeProbleme;
+    }
 }
