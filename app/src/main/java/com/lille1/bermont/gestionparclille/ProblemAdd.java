@@ -77,7 +77,7 @@ public class ProblemAdd extends AppCompatActivity {
         double problemLat = location.getLatitude();
         String problemLatitude = String.valueOf(problemLat);
 
-        double problemLong = location.getLatitude();
+        double problemLong = location.getLongitude();
         String problemLongitude = String.valueOf(problemLong);
 
         TextView address = (TextView) findViewById(R.id.adresse_value);

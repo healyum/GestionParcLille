@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,17 +33,10 @@ public class ProblemDetails extends AppCompatActivity {
                 showPositionOnMap();
             }
         });
-
-        Button btn_delete = (Button) findViewById(R.id.btn_delete);
-        btn_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteProblem();
-            }
-        });
+        
 
         /* On récupère l'objet problème sérialisé envoyé depuis la listView*/
-        Problem object_problem = (Problem) getIntent().getExtras().getSerializable(BundleKey.PROBLEM_ITEM);
+        final Problem object_problem = (Problem) getIntent().getExtras().getSerializable(BundleKey.PROBLEM_ITEM);
         TextView problemType = (TextView) findViewById(R.id.problemTypeValue);
         TextView problemDescription = (TextView) findViewById(R.id.problemDescValue);
         TextView problemLatitude = (TextView) findViewById(R.id.problemLatValue);
@@ -54,6 +48,17 @@ public class ProblemDetails extends AppCompatActivity {
         problemLatitude.setText(object_problem.posLatitute);
         problemLongitude.setText(object_problem.posLongitude);
         problemAddress.setText(object_problem.address);
+
+        //List<Problem> pt = Problem.find(Problem.class, "description = ?", object_problem.description);
+
+
+        Button btn_delete = (Button) findViewById(R.id.btn_delete);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteProblem(object_problem);
+            }
+        });
     }
 
     private void showPositionOnMap() {
@@ -72,13 +77,16 @@ public class ProblemDetails extends AppCompatActivity {
         }
     }
 
-    public void deleteProblem() {
+    public void deleteProblem(final Problem p) {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        //Yes button clicked
+                        Problem.executeQuery("DELETE FROM PROBLEM WHERE DESCRIPTION = '" + p.description + "'");
+                        Toast toast = Toast.makeText(ProblemDetails.this, "Le problème a bien été supprimé", Toast.LENGTH_SHORT);
+                        toast.show();
+                        finish();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
