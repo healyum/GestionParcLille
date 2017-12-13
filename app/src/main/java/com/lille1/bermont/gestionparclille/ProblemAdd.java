@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by USER on 10/12/2017.
@@ -83,9 +85,14 @@ public class ProblemAdd extends AppCompatActivity {
         TextView address = (TextView) findViewById(R.id.adresse_value);
         String problemAddress = address.getText().toString();
 
-        Problem problem = new Problem(problemType, problemLatitude, problemLongitude, problemDescription, problemAddress);
-        problem.save();
-
-        finish();
+        if(TextUtils.isEmpty(problemType) || TextUtils.isEmpty(problemDescription) || TextUtils.isEmpty(problemLatitude) || TextUtils.isEmpty(problemLongitude) || TextUtils.isEmpty(problemAddress)){
+            Toast toast = Toast.makeText(ProblemAdd.this, "Merci de bien renseigner tous les champs.", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else{
+            Problem problem = new Problem(problemType, problemLatitude, problemLongitude, problemDescription, problemAddress);
+            problem.save();
+            finish();
+        }
     }
 }
