@@ -68,10 +68,8 @@ public class ProblemAdd extends AppCompatActivity {
     }
 
     private void sendProblem(){
-        //TextView address = (TextView) findViewById(R.id.adresse_value);
-
         TextView description = (TextView) findViewById(R.id.description_pb_value);
-        String ProblemDescription = description.getText().toString();
+        String problemDescription = description.getText().toString();
 
         Spinner selectedProblemType = (Spinner) findViewById(R.id.type_probleme);
         String problemType = selectedProblemType.getSelectedItem().toString();
@@ -82,7 +80,10 @@ public class ProblemAdd extends AppCompatActivity {
         double problemLong = location.getLatitude();
         String problemLongitude = String.valueOf(problemLong);
 
-        Problem problem = new Problem(problemType, problemLatitude, problemLongitude, ProblemDescription);
+        TextView address = (TextView) findViewById(R.id.adresse_value);
+        String problemAddress = address.getText().toString();
+
+        Problem problem = new Problem(problemType, problemLatitude, problemLongitude, problemDescription, problemAddress);
         problem.save();
 
         finish();

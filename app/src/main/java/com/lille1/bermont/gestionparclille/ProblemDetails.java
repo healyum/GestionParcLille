@@ -41,18 +41,19 @@ public class ProblemDetails extends AppCompatActivity {
             }
         });
 
-        //String pb_description = getIntent().getExtras().getString("pb_desc","Pas de description");
+        /* On récupère l'objet problème sérialisé envoyé depuis la listView*/
         Problem object_problem = (Problem) getIntent().getExtras().getSerializable(BundleKey.PROBLEM_ITEM);
         TextView problemType = (TextView) findViewById(R.id.problemTypeValue);
         TextView problemDescription = (TextView) findViewById(R.id.problemDescValue);
         TextView problemLatitude = (TextView) findViewById(R.id.problemLatValue);
         TextView problemLongitude = (TextView) findViewById(R.id.problemLongValue);
+        TextView problemAddress = (TextView) findViewById(R.id.problemAddressValue);
 
         problemType.setText(object_problem.typeProbleme);
         problemDescription.setText(object_problem.description);
         problemLatitude.setText(object_problem.posLatitute);
         problemLongitude.setText(object_problem.posLongitude);
-
+        problemAddress.setText(object_problem.address);
     }
 
     private void showPositionOnMap() {
