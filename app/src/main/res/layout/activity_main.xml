@@ -11,47 +11,24 @@
         android:id="@+id/problem_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
-        android:layout_marginEnd="13dp"
         android:onClick="addProblem"
         android:text="Ajouter un problème"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problem1" />
+        tools:layout_editor_absoluteX="189dp"
+        tools:layout_editor_absoluteY="412dp" />
 
     <TextView
         android:id="@+id/main_title"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginStart="28dp"
+        android:layout_width="329dp"
+        android:layout_height="35dp"
         android:text="Gestion du parc vert Lille 1. Les derniers problèmes :"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/listView"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/problem1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_title" />
-
-    <TextView
-        android:id="@+id/problem1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="probleme1"
-        app:layout_constraintBottom_toTopOf="@+id/problem_add"
-        app:layout_constraintEnd_toEndOf="@+id/problem_add"
-        app:layout_constraintStart_toStartOf="@+id/problem_add"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        android:layout_width="368dp"
+        android:layout_height="278dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="86dp" />
 
 </android.support.constraint.ConstraintLayout>

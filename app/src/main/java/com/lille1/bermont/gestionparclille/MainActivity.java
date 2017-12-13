@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,20 +41,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // BDD
+        // Ajouter un problème
         //Problem problemMock = new Problem("Détritus", "50", "3", "Poubelle renversée");
         //problemMock.save();
 
-        //problem.findById(Problem.class, 1);
-        //TextView probleme1 = (TextView) findViewById(R.id.problem1);
-        //probleme1.setText(problem.description);
-
+        // Supprimer tous les problèmes
+//        List<Problem> problems = Problem.listAll(Problem.class);
+        //Problem.deleteAll(Problem.class);
 
         // Tableau de données
-        List<Problem> allProblems = Problem.listAll(Problem.class);
+        final List<Problem> allProblems = Problem.listAll(Problem.class);
 
         final ArrayList<String> listeProblem = new ArrayList<>();
         for(Problem problem:allProblems){
             listeProblem.add(problem.description);
+//            listeProblem.add(problem.posLongitude);
+//            listeProblem.add(problem.posLatitute);
+//            listeProblem.add(problem.typeProbleme);
         }
 
         // Listview
@@ -67,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ProblemDetails.class);
-                intent.putExtra("pb_desc", listeProblem.get(position));
-                intent.putExtra("pb_type", listeProblem);
+                Problem tProblem = allProblems.get(position);
+                intent.putExtra(BundleKey.PROBLEM_ITEM,tProblem);
                 startActivity(intent);
             }
         });
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        /* Méthode très sale pour raffrichir liste après ajout*/
+        /* Méthode très sale pour raffrichir liste après ajout qui recrée la liste car notifyDataSetChanged rencontre un bug */
         List<Problem> allProblems = Problem.listAll(Problem.class);
 
         final ArrayList<String> listeProblem = new ArrayList<>();
@@ -96,16 +100,6 @@ public class MainActivity extends AppCompatActivity {
         // Affectation de l'adapter à la liste view
         mListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-        mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, ProblemDetails.class);
-                intent.putExtra("pb_desc", listeProblem.get(position));
-                intent.putExtra("pb_type", listeProblem);
-                startActivity(intent);
-            }
-        });
     }
 
     /* Appel de la vue pour ajouter un problème */

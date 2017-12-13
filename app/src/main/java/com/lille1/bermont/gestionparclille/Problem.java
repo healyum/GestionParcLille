@@ -67,9 +67,4 @@ public class Problem extends SugarRecord implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    @Override
-    public String toString() {
-        return typeProbleme;
-    }
 }

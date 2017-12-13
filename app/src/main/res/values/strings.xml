@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GestionParcLille</string>
+    <string name="app_name">Gestion du Parc Vert Lille 1</string>
     <string name="title_activity_problem_details">Détail du problème</string>
     <string name="title_activity_problem_add">Ajouter un problème</string>
 
