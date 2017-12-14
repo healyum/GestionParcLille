@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginTop="41dp"
-        android:text="Type du problème :"
+        android:text="Type :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,10 +20,10 @@
         android:id="@+id/problemTypeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="94dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="41dp"
         android:text="Non défini"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/problemLat"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -48,59 +48,56 @@
         android:id="@+id/problemLong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="18dp"
         android:text="Longitude :"
-        app:layout_constraintStart_toStartOf="@+id/problemLat"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/problemLat" />
 
     <TextView
         android:id="@+id/problemLongValue"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginBottom="38dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="0dp"
         android:text="Non défini"
-        app:layout_constraintBottom_toBottomOf="@+id/problemDescValue"
+        app:layout_constraintBottom_toBottomOf="@+id/problemLong"
         app:layout_constraintStart_toStartOf="@+id/problemLatValue"
-        app:layout_constraintTop_toTopOf="@+id/problemLatValue" />
+        app:layout_constraintTop_toTopOf="@+id/problemLong" />
 
     <TextView
         android:id="@+id/problemAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="18dp"
         android:text="Adresse"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problemLong" />
+        app:layout_constraintBottom_toTopOf="@+id/problemDesc"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/problemAddressValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="17dp"
         android:text="Non défini"
-        app:layout_constraintStart_toStartOf="@+id/problemDescValue"
-        app:layout_constraintTop_toBottomOf="@+id/problemDescValue" />
-
-    <TextView
-        android:id="@+id/problemDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="22dp"
-        android:text="Description :"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problemAddress" />
+        app:layout_constraintStart_toStartOf="@+id/problemLongValue"
+        app:layout_constraintTop_toBottomOf="@+id/problemLongValue" />
 
     <TextView
         android:id="@+id/problemDescValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="13dp"
         android:text="Non défini"
-        app:layout_constraintStart_toStartOf="@+id/problemLongValue"
-        app:layout_constraintTop_toBottomOf="@+id/problemLatValue" />
+        app:layout_constraintStart_toStartOf="@+id/problemAddressValue"
+        app:layout_constraintTop_toBottomOf="@+id/problemAddressValue" />
+
+    <TextView
+        android:id="@+id/problemDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description :"
+        app:layout_constraintBaseline_toBaselineOf="@+id/problemDescValue"
+        app:layout_constraintStart_toStartOf="@+id/problemAddress" />
 
     <Button
         android:id="@+id/btn_showmap"

@@ -1,7 +1,9 @@
 package com.lille1.bermont.gestionparclille;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView mListView;
     ArrayAdapter<String> adapter;
+    private Boolean firstTime = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +46,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // BDD
-        // Ajouter un problème
-        //Problem problemMock = new Problem("Détritus", "50", "3", "Poubelle renversée");
-        //problemMock.save();
+        isFirstTime();
 
         // Supprimer tous les problèmes
-//        List<Problem> problems = Problem.listAll(Problem.class);
+        // List<Problem> problems = Problem.listAll(Problem.class);
         //Problem.deleteAll(Problem.class);
 
         // Tableau de données
@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<String> listeProblem = new ArrayList<>();
         for(Problem problem:allProblems){
             listeProblem.add(problem.description);
-//            listeProblem.add(problem.posLongitude);
-//            listeProblem.add(problem.posLatitute);
-//            listeProblem.add(problem.typeProbleme);
         }
 
         // Listview
@@ -102,6 +99,51 @@ public class MainActivity extends AppCompatActivity {
         // Affectation de l'adapter à la liste view
         mListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+
+    /**
+     * Vérifie si l'utilisateur ouvre l'application pour la première fois
+     * La méthode peut être appelée plusieurs depuis une même activité sans ré-exectuer le code
+     * @return boolean
+     */
+    private boolean isFirstTime() {
+        if (firstTime == null) {
+            SharedPreferences mPreferences = this.getSharedPreferences("first_time", Context.MODE_PRIVATE);
+            firstTime = mPreferences.getBoolean("firstTime", true);
+            if (firstTime) {
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.putBoolean("firstTime", false);
+                editor.apply();
+
+                // Fixture
+                // Ajouter un problème en BDD
+                // new Problem(type, latitude, longitude, description, adresse)
+
+                Problem problemMock1 = new Problem("Haie à tailler", "50.606868", "3.133743", "Haie bloquant le passage", "Halle Grémeaux, Avenue Paul Langevin");
+                Problem problemMock2 = new Problem("Mauvaise herbe", "50.609667", "3.143796", "Herbe peu entretenue", "Bâtiment C9, Avenue Paul Langevin");
+                Problem problemMock3 = new Problem("Détritus", "50.608318", "3.145545", "Poubelle non vidée", "Bâtiment SN4, Avenue Paul Langevin");
+                Problem problemMock4 = new Problem("Arbre à abattre", "50.611171", "3.144343", "Arbre dangereux", "Bâtiment C4, Avenue Paul Langevin");
+                Problem problemMock5 = new Problem("Autre", "50.605364", "3.133668", "Travaux", "Bâtiment B5, Avenue Paul Langevin");
+                Problem problemMock6 = new Problem("Haie à tailler", "50.608965", "3.139054", "Haie emcombrante", "Bâtiment M1, Avenue Paul Langevin");
+                Problem problemMock7 = new Problem("Détritus", "50.609413", "3.136318", "Poubelles non vidées", "Bâtiment M5, Avenue Paul Langevin");
+                Problem problemMock8 = new Problem("Mauvaise herbe", "50.610925", "3.140373", "Herbe abîmée", "Bâtiment P5, Avenue Paul Langevin");
+                Problem problemMock9 = new Problem("Autre", "50.609013", "3.136457", "Barrière sur le passage", "SEMM, Avenue Paul Langevin");
+                Problem problemMock10 = new Problem("Mauvaise herbe", "50.608188", "3.140395", "Herbe malade", "A3, Avenue Paul Langevin");
+
+                problemMock1.save();
+                problemMock2.save();
+                problemMock3.save();
+                problemMock4.save();
+                problemMock5.save();
+                problemMock6.save();
+                problemMock7.save();
+                problemMock8.save();
+                problemMock9.save();
+                problemMock10.save();
+            }
+        }
+        return firstTime;
     }
 
     /* Appel de la vue pour ajouter un problème */
