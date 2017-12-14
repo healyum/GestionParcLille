@@ -65,7 +65,7 @@ public class ProblemDetails extends AppCompatActivity {
 
     private void showPositionOnMap() {
         // Affichage d'une position
-        Uri location = Uri.parse("https://www.google.com/maps/search/?api=1&query="+ object_problem.posLatitute +", "+ object_problem.posLatitute+"");
+        Uri location = Uri.parse("https://www.google.com/maps/search/?api=1&query="+ object_problem.posLatitute +", "+ object_problem.posLongitude+"");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
 
         // Vérifie qu'Android connait ce type d'activité

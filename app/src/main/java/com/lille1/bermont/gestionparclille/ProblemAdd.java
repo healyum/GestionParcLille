@@ -1,16 +1,24 @@
 package com.lille1.bermont.gestionparclille;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by USER on 10/12/2017.
@@ -61,15 +69,15 @@ public class ProblemAdd extends AppCompatActivity {
         updateLocation();
     }
 
-    private void updateLocation()
-    {
+    private void updateLocation() {
         location = m_gps.getLocation();
         String coordonnees = "(" + location.getLatitude() + ", " + location.getLongitude() + ")";
 
         m_text.setText(coordonnees);
+        displayCompleteAddress();
     }
 
-    private void sendProblem(){
+    private void sendProblem() {
         TextView description = (TextView) findViewById(R.id.description_pb_value);
         String problemDescription = description.getText().toString();
 
@@ -85,14 +93,36 @@ public class ProblemAdd extends AppCompatActivity {
         TextView address = (TextView) findViewById(R.id.adresse_value);
         String problemAddress = address.getText().toString();
 
-        if(TextUtils.isEmpty(problemType) || TextUtils.isEmpty(problemDescription) || TextUtils.isEmpty(problemLatitude) || TextUtils.isEmpty(problemLongitude) || TextUtils.isEmpty(problemAddress)){
+        if (TextUtils.isEmpty(problemType) || TextUtils.isEmpty(problemDescription) || TextUtils.isEmpty(problemLatitude) || TextUtils.isEmpty(problemLongitude) || TextUtils.isEmpty(problemAddress)) {
             Toast toast = Toast.makeText(ProblemAdd.this, "Merci de bien renseigner tous les champs.", Toast.LENGTH_SHORT);
             toast.show();
-        }
-        else{
+        } else {
             Problem problem = new Problem(problemType, problemLatitude, problemLongitude, problemDescription, problemAddress);
             problem.save();
             finish();
+        }
+    }
+
+    public void displayCompleteAddress() {
+
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(ProblemAdd.this, Locale.getDefault());
+
+        double problemLat = location.getLatitude();
+        Log.d("problemLat : ", String.valueOf(problemLat));
+        double problemLong = location.getLongitude();
+        TextView address = (TextView) findViewById(R.id.adresse_value);
+
+        try {
+            addresses = geocoder.getFromLocation(problemLat, problemLong, 1); // 1 correspond au nombre d'adresses retournées. On peut retourner plus d'adresses à proximité
+            if (addresses != null && addresses.size() > 0) {
+                String completeAddress = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                address.setText(completeAddress);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
