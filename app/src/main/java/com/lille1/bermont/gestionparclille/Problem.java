@@ -10,7 +10,9 @@ import java.util.List;
 import static com.orm.util.ReflectionUtil.getDomainClasses;
 
 /**
- * Created by USER on 10/12/2017.
+ * @author Benjamin Bermont
+ *         Classe Problem qui mappe un objet Problem avec une bdd SQLITE via l'orm SugarORM
+ *         SugarORM crée la bdd en se basant sur la structure de l'objet Problem
  */
 
 public class Problem extends SugarRecord implements Serializable {
@@ -20,9 +22,16 @@ public class Problem extends SugarRecord implements Serializable {
     String description;
     String address;
 
-    public Problem(){
+    public Problem() {
     }
 
+    /**
+     * @param typeProbleme
+     * @param posLatitute
+     * @param posLongitude
+     * @param description
+     * @param address
+     */
     public Problem(String typeProbleme, String posLatitute, String posLongitude, String description, String address) {
         this.typeProbleme = typeProbleme;
         this.posLatitute = posLatitute;
@@ -31,6 +40,12 @@ public class Problem extends SugarRecord implements Serializable {
         this.address = address;
     }
 
+    /**
+     * Méthode pour supprimer tous les enregistrements de la base de données. Inutilisée
+     * Utilisation : Problem.deleteAllrecords(this);
+     *
+     * @param applicationContext
+     */
     public static void deleteAllrecords(Context applicationContext) {
         List<Class> domainClasses = getDomainClasses(applicationContext);
         for (Class domain : domainClasses) {

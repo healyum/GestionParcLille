@@ -16,7 +16,8 @@ import android.widget.Toast;
 import java.util.List;
 
 /**
- * Created by USER on 10/12/2017.
+ * @author Benjamin Bermont
+ *         Classe qui s'occupe de l'ffichage de la vue Détail d'un problème
  */
 
 public class ProblemDetails extends AppCompatActivity {
@@ -36,8 +37,7 @@ public class ProblemDetails extends AppCompatActivity {
             }
         });
 
-
-        /* On récupère l'objet problème sérialisé envoyé depuis la listView*/
+        //On récupère l'objet problème sérialisé envoyé depuis la listView
         object_problem = (Problem) getIntent().getExtras().getSerializable(BundleKey.PROBLEM_ITEM);
         TextView problemType = (TextView) findViewById(R.id.problemTypeValue);
         TextView problemDescription = (TextView) findViewById(R.id.problemDescValue);
@@ -51,9 +51,7 @@ public class ProblemDetails extends AppCompatActivity {
         problemLongitude.setText(object_problem.posLongitude);
         problemAddress.setText(object_problem.address);
 
-        //List<Problem> pt = Problem.find(Problem.class, "description = ?", object_problem.description);
-
-
+        // Bouton appelé après que l'objet problème soit récupéré depuis l'autre activité
         Button btn_delete = (Button) findViewById(R.id.btn_delete);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,9 +61,12 @@ public class ProblemDetails extends AppCompatActivity {
         });
     }
 
+    /**
+     * Affiche sur une carte Google Maps la position du problème
+     */
     private void showPositionOnMap() {
         // Affichage d'une position
-        Uri location = Uri.parse("https://www.google.com/maps/search/?api=1&query="+ object_problem.posLatitute +", "+ object_problem.posLongitude+"");
+        Uri location = Uri.parse("https://www.google.com/maps/search/?api=1&query=" + object_problem.posLatitute + ", " + object_problem.posLongitude + "");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
 
         // Vérifie qu'Android connait ce type d'activité
@@ -79,6 +80,9 @@ public class ProblemDetails extends AppCompatActivity {
         }
     }
 
+    /**
+     * Supprimer le problème sélectionné et affiché dans la vue
+     */
     public void deleteProblem() {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override

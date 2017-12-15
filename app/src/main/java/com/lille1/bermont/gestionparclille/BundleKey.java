@@ -1,7 +1,9 @@
 package com.lille1.bermont.gestionparclille;
 
 /**
- * Created by USER on 13/12/2017.
+ * @author Benjamin Bermont
+ *         Classe permettant de créer un TAG utilisé notamment dans putExtra de manière plus propre.
+ *         Cela permet en effet de créer des constantes sous forme de chaîne de caractère réutilisables
  */
 
 public class BundleKey {

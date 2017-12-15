@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,23 +12,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Benjamin Bermont
+ *         Classe principale, point d'entrée de l'application. S'occupe de gérer les permissions, d'afficher la listView avec les problèmes.
+ *         Crée une liste de problèmes fictifs au premier démarrage de l'applicatio.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
+    final ArrayList<String> listeProblem = new ArrayList<>();
     ListView mListView;
     ArrayAdapter<String> adapter;
     List<Problem> allProblems;
     private Boolean firstTime = null;
-    final ArrayList<String> listeProblem = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Autoriser les permissions à partir d'Android 6
+        // Les permissions Fine et coarse servent à récupérer la position du GPS
+        // tandis que la permission internet est utilisée pour changer cette position en une vraie adresse
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -49,55 +51,53 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // Fixture : Créer des données fictives uniquement au premier lancement de l'application
         isFirstTime();
 
-        // Supprimer tous les problèmes
-        // List<Problem> problems = Problem.listAll(Problem.class);
-        //Problem.deleteAll(Problem.class);
-
-        // Tableau de données
+        // Récupère tous les données de la table Problem
         allProblems = Problem.listAll(Problem.class);
 
-        //final ArrayList<String> listeProblem = new ArrayList<>();
-        for(Problem problem:allProblems){
+        // Pour chaque problème on ajoute la description
+        for (Problem problem : allProblems) {
             listeProblem.add(problem.description);
         }
 
-        // Listview
         mListView = (ListView) findViewById(R.id.listView);
 
+        // On passe notre liste à un adapter
         adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, listeProblem);
         mListView.setAdapter(adapter);
 
-        // Afficher détail d'un problème
+        // Evènement lors du clique sur un problème. On transmet l'objet problème sélectionné à l'activité ProblemDetails pour afficher plus d'informations
         mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ProblemDetails.class);
                 Problem tProblem = allProblems.get(position);
-                intent.putExtra(BundleKey.PROBLEM_ITEM,tProblem);
+                intent.putExtra(BundleKey.PROBLEM_ITEM, tProblem);
                 startActivity(intent);
             }
         });
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
 
-        // Rafraichir listView
+        // De retour sur l'activité, on récupère les problèmes stockés en base de données, on efface les anciennes données et on met à jour l'adapter
         allProblems = Problem.listAll(Problem.class);
         listeProblem.clear();
-        for(Problem problem:allProblems){
+        for (Problem problem : allProblems) {
             listeProblem.add(problem.description);
         }
         adapter.notifyDataSetChanged();
     }
 
-
     /**
      * Vérifie si l'utilisateur ouvre l'application pour la première fois
-     * La méthode peut être appelée plusieurs depuis une même activité sans ré-exectuer le code
+     * La méthode peut être appelée plusieurs depuis une même activité sans executer le code de nouveau, on se souvient qu'il a déjà été executé
+     *
      * @return boolean
      */
     private boolean isFirstTime() {
