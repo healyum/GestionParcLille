@@ -110,7 +110,6 @@ public class ProblemAdd extends AppCompatActivity {
         geocoder = new Geocoder(ProblemAdd.this, Locale.getDefault());
 
         double problemLat = location.getLatitude();
-        Log.d("problemLat : ", String.valueOf(problemLat));
         double problemLong = location.getLongitude();
         TextView address = (TextView) findViewById(R.id.adresse_value);
 

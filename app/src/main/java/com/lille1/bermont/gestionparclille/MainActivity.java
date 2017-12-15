@@ -26,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     ListView mListView;
     ArrayAdapter<String> adapter;
+    List<Problem> allProblems;
     private Boolean firstTime = null;
+    final ArrayList<String> listeProblem = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
             }
             if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 2);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 3);
             }
         }
 
@@ -53,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         //Problem.deleteAll(Problem.class);
 
         // Tableau de données
-        final List<Problem> allProblems = Problem.listAll(Problem.class);
+        allProblems = Problem.listAll(Problem.class);
 
-        final ArrayList<String> listeProblem = new ArrayList<>();
+        //final ArrayList<String> listeProblem = new ArrayList<>();
         for(Problem problem:allProblems){
             listeProblem.add(problem.description);
         }
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // Listview
         mListView = (ListView) findViewById(R.id.listView);
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, listeProblem);
+        adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, listeProblem);
         mListView.setAdapter(adapter);
 
         // Afficher détail d'un problème
@@ -82,22 +85,12 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        /* Méthode très sale pour raffrichir liste après ajout qui recrée la liste car notifyDataSetChanged rencontre un bug */
-        List<Problem> allProblems = Problem.listAll(Problem.class);
-
-        final ArrayList<String> listeProblem = new ArrayList<>();
+        // Rafraichir listView
+        allProblems = Problem.listAll(Problem.class);
+        listeProblem.clear();
         for(Problem problem:allProblems){
             listeProblem.add(problem.description);
         }
-
-        // Récupération de la ListView
-        ListView mListView = (ListView)findViewById(R.id.listView);
-
-        // Création d'un adapter à l'aide d'un tableau de String (myList)
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listeProblem);
-
-        // Affectation de l'adapter à la liste view
-        mListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
