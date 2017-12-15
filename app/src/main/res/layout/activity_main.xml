@@ -7,41 +7,75 @@
     tools:context="com.lille1.bermont.gestionparclille.MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <Button
-        android:id="@+id/problem_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="51dp"
-        android:layout_marginEnd="10dp"
-        android:onClick="addProblem"
-        android:text="Ajouter un problème"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
-
     <TextView
         android:id="@+id/main_title"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="17dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="16dp"
-        android:text="Gestion du parc vert Lille 1. Les derniers problèmes :"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="384dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:text="Les derniers problèmes recensés :"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView"
+        app:layout_constraintVertical_bias="0.894">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="56dp"
+            android:layout_height="58dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="11dp"
+            app:srcCompat="@mipmap/tree"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="366dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="203dp"
+            android:layout_height="39dp"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:text="Gestion du parc Vert Lille 1"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="87dp"
+            tools:layout_editor_absoluteY="366dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/problemAdd"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="40dp"
+            android:clickable="true"
+            app:srcCompat="@mipmap/add"
+            tools:layout_editor_absoluteX="301dp"
+            tools:layout_editor_absoluteY="346dp" />
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="26dp"
+        android:layout_height="401dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/problem_add"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_title" />
 
